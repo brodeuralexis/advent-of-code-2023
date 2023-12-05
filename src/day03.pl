@@ -24,10 +24,6 @@ lines([L | Ls]) -->
 schematic([H | T]) -->
   lines([H | T]), { maplist(same_length(H), T) }.
 
-neighbor_position(neighbor(Position, _), Position).
-
-neighbor_value(neighbor(_, Value), Value).
-
 schematic_position_value([H | T], X-Y, Value) :-
   length([H | T], YMax),
   length(H, XMax),
