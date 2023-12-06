@@ -5,12 +5,14 @@
                    , pos_integer//1
                    , integer//1
                    , many1//1
+                   , integer_binary/2
                    ]).
 
 :- use_module(library(charsio)).
 :- use_module(library(clpz)).
 :- use_module(library(dcgs)).
 :- use_module(library(dif)).
+:- use_module(library(lists)).
 
 eol -->
   "\n".
@@ -44,3 +46,10 @@ many1_(_) -->
   [].
 many1_(C) -->
   [C], many1_(C).
+
+integer_binary(0, []).
+integer_binary(Integer, [Bit | Bits]) :-
+  length(Bits, Length),
+  Base #= Bit * (2 ^ Length),
+  integer_binary(Integer0, Bits),
+  Integer #= Base + Integer0.
